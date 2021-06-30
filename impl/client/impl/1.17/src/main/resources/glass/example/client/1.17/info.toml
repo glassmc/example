@@ -1,0 +1,7 @@
+[listeners]
+client-initialize = [
+    "io.github.glassmc.example.client.v1_17.ExampleClientInitializeListener"
+]
+
+[dependencies]
+client = "1.17"

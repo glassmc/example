@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url = 'https://jitpack.io/'
+        }
+    }
+
+    dependencies {
+        classpath 'com.github.glassmc:kiln:6baed4636d'
+    }
+}
+
+apply plugin: 'java-library'
+apply plugin: 'kiln-main'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://jitpack.io/'
+    }
+}
+
+dependencies {
+    implementation project(':')
+    implementation project(':impl:client')
+    implementation project(':impl:client:impl:1.7.10')
+    implementation project(':impl:client:impl:1.8.9')
+    implementation project(':impl:client:impl:1.17')
+}

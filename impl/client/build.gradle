@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url = 'https://jitpack.io/'
+        }
+    }
+
+    dependencies {
+        classpath 'com.github.glassmc:kiln:6baed4636d'
+    }
+}
+
+apply plugin: 'java-library'
+apply plugin: 'kiln-standard'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://jitpack.io/'
+    }
+}
+
+dependencies {
+    api project(':')
+    api 'com.github.glassmc.loader:client:f52ddaa2b2'
+}
+
+compileJava.dependsOn("processResources")
