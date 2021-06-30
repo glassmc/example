@@ -22,9 +22,25 @@ repositories {
 }
 
 dependencies {
-    implementation project(':')
-    implementation project(':impl:client')
-    implementation project(':impl:client:impl:1.7.10')
-    implementation project(':impl:client:impl:1.8.9')
-    implementation project(':impl:client:impl:1.17')
+    for(Project shardProject : collectAllProjects(parent)) {
+        if(shardProject.getBuildFile().exists()) {
+            String name = getName(shardProject)
+            implementation project(name.isEmpty() ? ':' : name)
+        }
+    }
+}
+
+List<Project> collectAllProjects(Project project) {
+    List<Project> childProjects = new ArrayList<>()
+    childProjects.add(project)
+
+    for(Project childProject : project.childProjects.values()) {
+        childProjects.addAll(collectAllProjects(childProject))
+    }
+
+    return childProjects
+}
+
+String getName(Project project) {
+    return project.parent != null ? getName(project.parent) + ':' + project.getName() : ''
 }
