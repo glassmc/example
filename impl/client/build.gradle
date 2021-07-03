@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:6baed4636d'
+        classpath 'com.github.glassmc:kiln:a8c38d1cfe'
     }
 }
 
@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     api project(':')
-    api 'com.github.glassmc.loader:client:f52ddaa2b2'
+    implementation 'com.github.glassmc:loader:f52ddaa2b2'
 }
 
 compileJava.dependsOn("processResources")

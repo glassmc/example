@@ -7,8 +7,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:6baed4636d'
+        classpath 'com.github.glassmc:kiln:a8c38d1cfe'
     }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 apply plugin: 'java-library'
@@ -21,11 +25,16 @@ repositories {
     }
 }
 
+configurations {
+    resolvedImplementation
+    implementation.extendsFrom(resolvedImplementation)
+}
+
 dependencies {
     for(Project shardProject : collectAllProjects(parent)) {
-        if(shardProject.getBuildFile().exists()) {
+        if(shardProject.getBuildFile().exists() && shardProject != project) {
             String name = getName(shardProject)
-            implementation project(name.isEmpty() ? ':' : name)
+            resolvedImplementation project(name.isEmpty() ? ':' : name)
         }
     }
 }
@@ -43,4 +52,8 @@ List<Project> collectAllProjects(Project project) {
 
 String getName(Project project) {
     return project.parent != null ? getName(project.parent) + ':' + project.getName() : ''
+}
+
+shadowJar {
+    configurations = [project.configurations.compileClasspath]
 }
