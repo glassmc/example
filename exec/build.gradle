@@ -1,16 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url = 'https://jitpack.io/'
-        }
-    }
-
-    dependencies {
-        classpath 'com.github.glassmc:kiln:a8c38d1cfe'
-    }
-}
-
 plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
