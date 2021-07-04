@@ -1,5 +1,3 @@
-[info]
-
 implementations = [
     "1.7.10",
     "1.8.9",

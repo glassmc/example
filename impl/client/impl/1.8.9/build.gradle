@@ -15,7 +15,7 @@ repositories {
 dependencies {
     api project(':impl:client')
     compileOnly minecraft('client', '1.8.9', 'yarn')
-    implementation 'com.github.glassmc:loader:cd95025a82'
+    implementation 'com.github.glassmc:loader:fbadd57696'
 }
 
 compileJava.dependsOn("processResources")
