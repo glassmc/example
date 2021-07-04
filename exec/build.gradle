@@ -55,5 +55,9 @@ String getName(Project project) {
 }
 
 shadowJar {
-    configurations = [project.configurations.compileClasspath]
+    dependencies {
+        exclude(dependency {
+            it.configuration != 'runtimeElements'
+        })
+    }
 }
