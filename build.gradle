@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:f52ddaa2b2'
+    implementation 'com.github.glassmc:loader:cd95025a82'
 }
 
 compileJava.dependsOn("processResources")

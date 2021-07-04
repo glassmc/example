@@ -1,4 +1,18 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url = 'https://jitpack.io/'
+        }
+    }
+
+    dependencies {
+        classpath 'com.github.glassmc:kiln:a8c38d1cfe'
+    }
+}
+
 apply plugin: 'java-library'
+apply plugin: 'kiln-standard'
 
 import static io.github.glassmc.kiln.standard.DependencyHandlerExtension.*
 
@@ -12,7 +26,7 @@ repositories {
 dependencies {
     api project(':impl:client')
     compileOnly minecraft('client', '1.17', 'yarn')
-    implementation 'com.github.glassmc:loader:f52ddaa2b2'
+    implementation 'com.github.glassmc:loader:cd95025a82'
 }
 
 compileJava.dependsOn("processResources")
