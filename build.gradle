@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.1.0'
+        classpath 'com.github.glassmc:kiln:v0.2.0'
     }
 }
 
@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:v0.1.0'
+    implementation 'com.github.glassmc:loader:v0.2.0'
 }
 
 compileJava.dependsOn("processResources")

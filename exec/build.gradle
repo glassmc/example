@@ -24,7 +24,7 @@ dependencies {
             resolvedImplementation project(name.isEmpty() ? ':' : name)
         }
     }
-    implementation 'com.github.glassmc:loader:v0.1.0'
+    implementation 'com.github.glassmc:loader:v0.2.0'
 }
 
 List<Project> collectAllProjects(Project project) {
