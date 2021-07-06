@@ -1,5 +1,5 @@
 [listeners]
-client-initialize = [
+initialize = [
     "io.github.glassmc.example.client.v1_8_9.ExampleClientInitializeListener"
 ]
 

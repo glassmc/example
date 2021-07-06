@@ -7,7 +7,7 @@ public class ExampleClientInitializeListener implements Listener {
 
     @Override
     public void run() {
-        System.out.println(GlassLoader.getInstance().getInterface(IExampleInterface.class).isMAC());
+        System.out.println("Am I currently on MAC (retrieved from minecraft)? " + GlassLoader.getInstance().getInterface(IExampleInterface.class).isMAC());
     }
 
 }
