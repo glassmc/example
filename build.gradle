@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:v0.2.0'
+    implementation 'com.github.glassmc:loader:v0.3.0'
 }
 
 compileJava.dependsOn("processResources")
