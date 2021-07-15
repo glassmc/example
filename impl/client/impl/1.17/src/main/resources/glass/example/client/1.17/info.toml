@@ -1,6 +1,6 @@
 [listeners]
 initialize = [
-    "io.github.glassmc.example.client.v1_17.ExampleInitializeListener"
+    "com.github.glassmc.example.client.v1_17.ExampleInitializeListener"
 ]
 
 [dependencies]

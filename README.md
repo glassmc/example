@@ -15,7 +15,17 @@ Instructions should be relatively clear, but don't be afraid to ask because ther
 Download / Clone the github repository to get the contents locally.
 
 ## Running
-Kiln does not have any functionality yet in terms of generating run configurations, so here is a manual tutorial.
+
+### For IntelliJ IDEA Users:
+
+Run
+
+`./gradlew genRunConfiguration -PminecraftEnvironment=client -PminecraftVersion=1.8.9`
+
+and a run configuration should be created (you will have to go into run configurations and select it)
+
+### Everyone Else:
+Kiln does not yet support automatically creating run configurations for any other IDEs, so you will have to create one manually.
 
  - **Classpath:** {project-name}.exec.main
  - **JVM Arguments:** see [jvm arguments](#jvm-arguments)
@@ -23,18 +33,18 @@ Kiln does not have any functionality yet in terms of generating run configuratio
  - **Program Arguments:** see [program arguments](#program-arguments)  
  - **Working Directory:** run
 
-### JVM Arguments
+#### JVM Arguments
 To get the proper jvm arguments, run
 
-`./gradlew getRunConfiguration -Penvironment={client/server} -Pversion={version}`
+`./gradlew getRunConfiguration -PminecraftEnvironment={client/server} -PminecraftVersion={version}`
 
 For example, to get the correct arguments for running a 1.8.9 client.
 
-`./gradlew getRunConfiguration -Penvironment=client -Pversion=1.8.9`
+`./gradlew getRunConfiguration -PminecraftEnvironment=client -PminecraftVersion=1.8.9`
 
 You will see a long string printed into the terminal, copy that and add it to your jvm arguments.
 
-### Program Arguments
+#### Program Arguments
 Most versions will work with supplying
 
 `--accessToken 0 --version {version}`

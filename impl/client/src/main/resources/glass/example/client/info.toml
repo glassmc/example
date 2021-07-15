@@ -6,7 +6,7 @@ implementations = [
 
 [listeners]
 initialize = [
-    "io.github.glassmc.example.client.ExampleClientInitializeListener"
+    "com.github.glassmc.example.client.ExampleClientInitializeListener"
 ]
 
 [dependencies]
