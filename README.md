@@ -1,4 +1,4 @@
-# Glass Example Shard
+# Glass - Example
 A basic shard that demonstrates **optional implementations**, and **interfaces**.
 
 # Basic Information
