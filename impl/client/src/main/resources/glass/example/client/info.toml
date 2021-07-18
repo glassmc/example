@@ -9,5 +9,6 @@ initialize = [
     "com.github.glassmc.example.client.ExampleClientInitializeListener"
 ]
 
-[dependencies]
-client = "*"
+[environment]
+    [environment.has]
+    client = "*"

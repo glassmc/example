@@ -1,10 +1,13 @@
+namespace = "com.github.glassmc.example.client.v1_8_9"
+
 [listeners]
 initialize = [
-    "com.github.glassmc.example.client.v1_8_9.ExampleInitializeListener"
+    "ExampleInitializeListener"
 ]
 terminate = [
-    "com.github.glassmc.example.client.v1_8_9.ExampleTerminateListener"
+    "ExampleTerminateListener"
 ]
 
-[dependencies]
-client = "1.8.9"
+[environment]
+    [environment.has]
+    client = "1.8.9"
