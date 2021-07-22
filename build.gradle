@@ -7,12 +7,16 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.4.0'
+        classpath 'com.github.glassmc:kiln:v0.4.2'
     }
 }
 
-apply plugin: 'java-library'
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
 apply plugin: 'kiln-standard'
+apply plugin: 'kiln-main'
 
 sourceCompatibility = targetCompatibility = 1.8
 
@@ -24,7 +28,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:v0.4.0'
+    runtimeOnly 'com.github.glassmc:loader:v0.4.0'
 }
 
-compileJava.dependsOn("processResources")
+shadowJar {
+    configurations = [project.configurations.getByName("shadowRuntime")]
+}

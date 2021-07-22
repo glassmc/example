@@ -1,4 +1,3 @@
-apply plugin: 'java-library'
 apply plugin: 'kiln-standard'
 
 import static com.github.glassmc.kiln.standard.DependencyHandlerExtension.*
@@ -17,7 +16,5 @@ dependencies {
     compileOnly minecraft('client', '1.8.9', 'yarn')
     implementation 'com.github.glassmc:loader:v0.4.0'
 
-    api 'org.ow2.asm:asm-tree:9.2'
+    shadowImplementation 'org.ow2.asm:asm-tree:9.2'
 }
-
-compileJava.dependsOn("processResources")
