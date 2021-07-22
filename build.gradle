@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.4.3'
+        classpath 'com.github.glassmc:kiln:v0.4.4'
     }
 }
 
@@ -29,8 +29,4 @@ repositories {
 
 dependencies {
     runtimeOnly 'com.github.glassmc:loader:v0.4.0'
-}
-
-shadowJar {
-    configurations = [project.configurations.getByName("shadowRuntime")]
 }
