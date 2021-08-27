@@ -1,8 +1,0 @@
-[listeners]
-initialize = [
-    "com.github.glassmc.example.client.v1_7_10.ExampleInitializeListener"
-]
-
-[environment]
-    [environment.has]
-    client = "1.7.10"

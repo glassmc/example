@@ -1,3 +1,5 @@
+import static com.github.glassmc.kiln.standard.DependencyHandlerExtension.*;
+
 buildscript {
     repositories {
         mavenCentral()
@@ -7,15 +9,10 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.4.8'
+        classpath 'com.github.glassmc:kiln:v0.5.5'
     }
 }
 
-plugins {
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
-}
-
-apply plugin: 'kiln-standard'
 apply plugin: 'kiln-main'
 
 sourceCompatibility = targetCompatibility = 1.8
@@ -28,5 +25,11 @@ repositories {
 }
 
 dependencies {
-    runtimeOnly 'com.github.glassmc:loader:v0.4.0'
+    implementation 'com.github.glassmc:loader:v0.6.1'
+
+    implementation minecraft('client', '1.7.10', 'yarn')
+    implementation minecraft('client', '1.8.9', 'yarn')
+    implementation minecraft('client', '1.17.1', 'yarn')
+
+    implementation 'org.ow2.asm:asm-tree:9.2'
 }
