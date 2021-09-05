@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.5.5'
+        classpath 'com.github.glassmc:kiln:v0.5.7'
     }
 }
 
@@ -29,7 +29,7 @@ dependencies {
 
     implementation minecraft('client', '1.7.10', 'yarn')
     implementation minecraft('client', '1.8.9', 'yarn')
-    implementation minecraft('client', '1.17.1', 'yarn')
+    compileOnly minecraft('client', '1.17.1', 'yarn')
 
     implementation 'org.ow2.asm:asm-tree:9.2'
 }

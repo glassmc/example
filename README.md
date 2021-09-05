@@ -34,11 +34,11 @@ Kiln does not yet support automatically creating run configurations for any othe
 #### JVM Arguments
 To get the proper jvm arguments, run
 
-`./gradlew getRunConfiguration -PminecraftEnvironment={client/server} -PminecraftVersion={version}`
+`./gradlew getRunConfiguration -Pconfiguration={ide},{client/server},{version}`
 
 For example, to get the correct arguments for running a 1.8.9 client.
 
-`./gradlew getRunConfiguration -PminecraftEnvironment=client -PminecraftVersion=1.8.9`
+`./gradlew getRunConfiguration -Pconfiguration=idea,client,1.8.9`
 
 You will see a long string printed into the terminal, copy that and add it to your jvm arguments.
 
