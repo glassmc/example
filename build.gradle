@@ -3,13 +3,14 @@ import static com.github.glassmc.kiln.standard.DependencyHandlerExtension.*;
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
         maven {
             url = 'https://jitpack.io/'
         }
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.5.7'
+        classpath 'com.github.glassmc:kiln:0.5.10'
     }
 }
 
@@ -29,7 +30,7 @@ dependencies {
 
     implementation minecraft('client', '1.7.10', 'yarn')
     implementation minecraft('client', '1.8.9', 'yarn')
-    compileOnly minecraft('client', '1.17.1', 'yarn')
+    implementation minecraft('client', '1.17.1', 'yarn')
 
     implementation 'org.ow2.asm:asm-tree:9.2'
 }
