@@ -12,26 +12,29 @@ import org.objectweb.asm.tree.MethodNode;
 public class MinecraftClientTransformer implements ITransformer {
 
     private final Identifier MINECRAFT_CLIENT = Identifier.parse("v1_8_9/net/minecraft/client/MinecraftClient");
-    private final Identifier RUN_GAME_LOOP = Identifier.parse("v1_8_9/net/minecraft/client/MinecraftClient#runGameLoop()V");
+
+    @Override
+    public boolean canTransform(String name) {
+        return name.equals(MINECRAFT_CLIENT.getClassName());
+    }
 
     @Override
     public byte[] transform(String name, byte[] data) {
-        if(name.equals(MINECRAFT_CLIENT.getClassName())) {
-            ClassNode classNode = new ClassNode();
-            ClassReader classReader = new ClassReader(data);
-            classReader.accept(classNode, 0);
+        ClassNode classNode = new ClassNode();
+        ClassReader classReader = new ClassReader(data);
+        classReader.accept(classNode, 0);
 
-            for(MethodNode methodNode : classNode.methods) {
-                if(methodNode.name.equals(RUN_GAME_LOOP.getMethodName()) && methodNode.desc.equals(RUN_GAME_LOOP.getMethodDesc())) {
-                    methodNode.instructions.insert(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.class.getName().replace(".", "/"), "test", "()V"));
-                }
+        Identifier runGameLoop = Identifier.parse("v1_8_9/net/minecraft/client/MinecraftClient#runGameLoop()V");
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(methodNode.name.equals(runGameLoop.getMethodName()) && methodNode.desc.equals(runGameLoop.getMethodDesc())) {
+                methodNode.instructions.insert(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.class.getName().replace(".", "/"), "test", "()V"));
             }
-
-            ClassWriter classWriter = new ClassWriter(0);
-            classNode.accept(classWriter);
-            return classWriter.toByteArray();
         }
-        return data;
+
+        ClassWriter classWriter = new ClassWriter(0);
+        classNode.accept(classWriter);
+        return classWriter.toByteArray();
     }
 
 }
