@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.6.3'
+        classpath 'com.github.glassmc:kiln:v0.6.8'
     }
 }
 
@@ -27,10 +27,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:v0.6.6'
+    implementation 'com.github.glassmc:loader:v0.6.7'
 
     implementation minecraft('client', '1.7.10', 'yarn')
-    implementation minecraft('client', '1.8.9', 'yarn')
+    implementation minecraft('client', '1.8.9', 'mcp')
     implementation minecraft('client', '1.17.1', 'yarn')
     implementation minecraft('client', '1.18.1', 'mojang')
 
