@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.MethodNode;
 
 public class MinecraftClientTransformer implements Transformer {
 
-    private final Identifier MINECRAFT_CLIENT = Identifier.parse("v1_8_9/net/minecraft/client/MinecraftClient");
+    private final Identifier MINECRAFT_CLIENT = Identifier.parse("v1_8_9/net/minecraft/client/Minecraft");
 
     @Override
     public boolean canTransform(String name) {
@@ -20,11 +20,12 @@ public class MinecraftClientTransformer implements Transformer {
 
     @Override
     public byte[] transform(String name, byte[] data) {
+        System.out.println("Real Transforming Minecraft");
         ClassNode classNode = new ClassNode();
         ClassReader classReader = new ClassReader(data);
         classReader.accept(classNode, 0);
 
-        Identifier runGameLoop = Identifier.parse("v1_8_9/net/minecraft/client/MinecraftClient#runGameLoop()V");
+        Identifier runGameLoop = Identifier.parse("v1_8_9/net/minecraft/client/Minecraft#runGameLoop()V");
 
         for(MethodNode methodNode : classNode.methods) {
             if(methodNode.name.equals(runGameLoop.getMethodName()) && methodNode.desc.equals(runGameLoop.getMethodDesc())) {
