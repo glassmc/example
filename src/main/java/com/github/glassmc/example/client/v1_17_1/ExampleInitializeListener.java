@@ -1,8 +1,8 @@
 package com.github.glassmc.example.client.v1_17_1;
 
 import com.github.glassmc.example.client.IExampleInterface;
-import com.github.glassmc.loader.GlassLoader;
-import com.github.glassmc.loader.Listener;
+import com.github.glassmc.loader.api.GlassLoader;
+import com.github.glassmc.loader.api.Listener;
 
 public class ExampleInitializeListener implements Listener {
 
