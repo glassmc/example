@@ -44,6 +44,7 @@ repositories {
 
 dependencies {
     implementation 'com.github.glassmc:loader:0.8.3'
+    implementation 'com.github.glassmc.loader:client:0.8.3'
 
     implementation minecraft('client', '1.7.10', 'yarn')
     implementation minecraft('client', '1.8.9', 'mcp')
