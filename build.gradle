@@ -8,7 +8,7 @@ import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 
-import static com.github.glassmc.kiln.standard.DependencyHandlerExtension.*;
+import static com.github.glassmc.kiln.standard.DependencyHandlerExtension.*
 
 buildscript {
     repositories {
@@ -16,10 +16,13 @@ buildscript {
         maven {
             url = 'https://jitpack.io/'
         }
+        maven {
+            url = 'https://glassmc.ml/repository/'
+        }
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.6.18'
+        classpath 'com.github.glassmc:kiln:0.6.18'
     }
 }
 
@@ -35,16 +38,12 @@ repositories {
     }
 
     maven {
-        url = 'https://jitpack.io/'
-    }
-
-    maven {
         url = 'https://repo.spongepowered.org/repository/maven-public/'
     }
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:v0.8.3'
+    implementation 'com.github.glassmc:loader:0.8.3'
 
     implementation minecraft('client', '1.7.10', 'yarn')
     implementation minecraft('client', '1.8.9', 'mcp')
