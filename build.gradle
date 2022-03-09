@@ -31,7 +31,7 @@ repositories {
     mavenCentral()
 
     maven {
-        url = 'https://raw.github.com/glassmc/repository/main/'
+        url = 'https://glassmc.ml/repository/'
     }
 
     maven {
