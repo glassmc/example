@@ -1,4 +1,5 @@
-import com.github.glassmc.kiln.standard.CustomRemapper
+import com.github.glassmc.kiln.standard.CustomTransformer
+import com.github.glassmc.kiln.standard.environment.GlassLoaderEnvironment
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.AnnotationNode
@@ -8,11 +9,10 @@ import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 
-import static com.github.glassmc.kiln.standard.DependencyHandlerExtension.*
-
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
         maven {
             url = 'https://jitpack.io/'
         }
@@ -22,7 +22,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:0.6.18'
+        classpath 'com.github.glassmc:kiln:0.7.5'
     }
 }
 
@@ -43,13 +43,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:0.8.3'
-    implementation 'com.github.glassmc.loader:client:0.8.3'
-
-    implementation minecraft('client', '1.7.10', 'yarn')
-    implementation minecraft('client', '1.8.9', 'mcp')
-    implementation minecraft('client', '1.17.1', 'yarn')
-    implementation minecraft('client', '1.18.1', 'mojang')
+    implementation 'com.github.glassmc:loader:0.9.3'
 
     implementation 'org.ow2.asm:asm-tree:9.2'
 
@@ -57,10 +51,17 @@ dependencies {
 }
 
 kiln {
-    remappers = [new MixinRemapper()]
+    transformers = [new MixinRemapper()]
+    environment = new GlassLoaderEnvironment("0.9.3")
+    minecraft = [
+            "client:1.7.10:yarn",
+            "client:1.8.9:mcp",
+            "client:1.17.1:yarn",
+            "client:1.18.1:mojang"
+    ]
 }
 
-class MixinRemapper extends CustomRemapper {
+class MixinRemapper extends CustomTransformer {
 
     private final Map<String, String> mixinClasses = new HashMap<>()
     private Map<String, ClassNode> classNodes
@@ -83,7 +84,7 @@ class MixinRemapper extends CustomRemapper {
                             values.clear()
 
                             for (Type type : oldValues) {
-                                values.add(Type.getType("L" + this.parent.map(type.getClassName().replace(".", "/")) + ";"))
+                                values.add(Type.getType("L" + this.getRemapper().map(type.getClassName().replace(".", "/")) + ";"))
                             }
                         }
                     }
@@ -121,7 +122,7 @@ class MixinRemapper extends CustomRemapper {
                                 int splitIndex = string.indexOf('(')
                                 String name = string.substring(0, splitIndex)
                                 String desc = string.substring(splitIndex)
-                                newTargets.add(this.getParent().mapMethodName(this.getMixinClass(className), name, desc) + this.getParent().mapMethodDesc(desc))
+                                newTargets.add(this.getRemapper().mapMethodName(this.getMixinClass(className), name, desc) + this.getRemapper().mapMethodDesc(desc))
                             }
                             int index = annotationNode.values.indexOf(targets)
                             annotationNode.values.remove(targets)
@@ -140,7 +141,7 @@ class MixinRemapper extends CustomRemapper {
 
                                 int targetIndex = atAnnotation.values.indexOf(target)
                                 atAnnotation.values.remove(target)
-                                atAnnotation.values.add(targetIndex, "L" + this.getParent().map(className1) + ";" + this.getParent().mapMethodName(className1, methodName, methodDesc) + this.getParent().mapMethodDesc(methodDesc))
+                                atAnnotation.values.add(targetIndex, "L" + this.getRemapper().map(className1) + ";" + this.getRemapper().mapMethodName(className1, methodName, methodDesc) + this.getRemapper().mapMethodDesc(methodDesc))
                             }
                         }
                     }
@@ -171,7 +172,7 @@ class MixinRemapper extends CustomRemapper {
             String prefix = methodName.startsWith("invoke") ? "invoke" : "call"
             String strippedName = methodName.replace(prefix, "")
             strippedName = strippedName.charAt(0).toLowerCase().toString() + strippedName.substring(1)
-            methodName = this.getParent().mapMethodName(mixinClass, strippedName, methodDesc)
+            methodName = this.getRemapper().mapMethodName(mixinClass, strippedName, methodDesc)
             if(methodName != strippedName) {
                 changed = true
             }
@@ -180,7 +181,7 @@ class MixinRemapper extends CustomRemapper {
             String prefix = methodName.startsWith("get") ? "get" : methodName.startsWith("set") ? "set" : "is"
             String strippedName = methodName.replace(prefix, "")
             strippedName = strippedName.charAt(0).toLowerCase().toString() + strippedName.substring(1)
-            methodName = this.getParent().mapFieldName(mixinClass, strippedName, methodDesc)
+            methodName = this.getRemapper().mapFieldName(mixinClass, strippedName, methodDesc)
             if(methodName != strippedName) {
                 changed = true
             }
@@ -188,14 +189,14 @@ class MixinRemapper extends CustomRemapper {
         }
 
         if(!changed) {
-            methodName = this.getParent().mapMethodName(mixinClass, methodName, methodDesc)
+            methodName = this.getRemapper().mapMethodName(mixinClass, methodName, methodDesc)
         }
         return methodName
     }
 
     private String mapFieldName(String className, String fieldName, String fieldDesc) {
         String mixinClass = this.getMixinClass(className)
-        return this.getParent().mapFieldName(mixinClass, fieldName, fieldDesc)
+        return this.getRemapper().mapFieldName(mixinClass, fieldName, fieldDesc)
     }
 
     private String getMixinClass(String className) {
