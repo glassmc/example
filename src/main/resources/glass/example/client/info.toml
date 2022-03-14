@@ -6,6 +6,3 @@ implementations = [
     "1.17.1",
     "1.18.1"
 ]
-
-[listeners]
-initialize = "ExampleClientInitializeListener"

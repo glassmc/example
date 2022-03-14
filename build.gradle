@@ -12,7 +12,7 @@ import org.objectweb.asm.tree.MethodNode
 buildscript {
     repositories {
         mavenCentral()
-        mavenLocal()
+
         maven {
             url = 'https://jitpack.io/'
         }
@@ -22,7 +22,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:0.7.5'
+        classpath 'com.github.glassmc:kiln:0.7.7'
     }
 }
 
@@ -40,19 +40,23 @@ repositories {
     maven {
         url = 'https://repo.spongepowered.org/repository/maven-public/'
     }
+
+    maven {
+        url = 'https://jitpack.io/'
+    }
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:0.9.3'
+    implementation 'com.github.glassmc:loader:0.9.5:mapped'
 
     implementation 'org.ow2.asm:asm-tree:9.2'
 
-    implementation 'com.github.glassmc:mixin:1.0:mapped'
+    implementation 'com.github.glassmc:mixin:0f7814c92f:mapped'
 }
 
 kiln {
     transformers = [new MixinRemapper()]
-    environment = new GlassLoaderEnvironment("0.9.3")
+    environment = new GlassLoaderEnvironment("0.9.5")
     minecraft = [
             "client:1.7.10:yarn",
             "client:1.8.9:mcp",
