@@ -11,7 +11,7 @@ public class MixinMinecraftClient {
 
     @Inject(method = "tick()V", at = @At("HEAD"))
     public void onTick(CallbackInfo callbackInfo) {
-        System.out.println("1.7.10 tick!");
+        System.out.println("1.7.10 tick");
     }
 
 }
