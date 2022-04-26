@@ -14,7 +14,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:0.8.8'
+        classpath 'com.github.glassmc:kiln:0.8.10'
     }
 }
 
@@ -28,7 +28,6 @@ sourceCompatibility = targetCompatibility = 1.8
 repositories {
     mavenCentral()
 
-    mavenLocal()
     maven {
         url = 'https://glassmc.ml/repository/'
     }
@@ -43,9 +42,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:0.9.5:mapped'
+    shadowImplementation 'com.github.glassmc:loader:0.9.9'
 
-    implementation 'com.github.glassmc:mixin:1.0:mapped'
+    implementation 'com.github.glassmc:mixin:c5ecf5aa4a:mapped'
 
     compileOnly 'net.minecraft:client-1.7.10:yarn'
     compileOnly 'net.minecraft:client-1.8.9:mcp'
@@ -55,5 +54,5 @@ dependencies {
 
 kiln {
     transformers = [new MixinRemapper()]
-    environment = new GlassLoaderEnvironment("0.9.5")
+    environment = new GlassLoaderEnvironment("0.9.9")
 }
